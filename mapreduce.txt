@@ -41,5 +41,30 @@ def getRevenueForOrderId(orderItems,orderId):
 orderItems = open('/home/shubham/data/retail_db/order_items/part-00000').read().splitlines()
 >>> getRevennueForOrderId(orderItems,2)
     579.98
-       
+
+
+ 
+# get revenue for given order_id by using map reduce.
+
+def getOrderRevenue(orderItems,orderId)
+    orderItemsFilter = filter(lambda oi:int(oi.split(",")[1]) == orderId,orderItems)
+    orderItemsMap = map(lambda oi: float(oi.split(",")[4]),orderItemsFilter)
+    orderItemsReduce = reduce(lambda x,y:x+y)
+    return orderItemsReduce
+    
+>>>orderItems = sc.textFile('/home/shubham/data/retail_db/order_items/part-00000')
+>>>getOrderRevenue(orderItems,2)
+   579.98
+
+
+    
+#get revenue for each orderId.
+
+orderItems = sc.textFile('/data/retail_db/order_items/part-00000')
+orderItemsMap = orderItems.map(lambda oi:oi.split(","),float(oi.split(",")))
+Revenue = orderItemsMap.reduceByKey(lambda x,y: x+y)
+for i in Revenue.take(10):
+  print(i)
+
+ 
   
