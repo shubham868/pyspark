@@ -1,0 +1,7 @@
+#create our map function
+
+def my_map(c,f):
+  l = []
+  for i in c:
+    l.append(f(i))
+   return l
