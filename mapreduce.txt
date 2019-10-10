@@ -5,3 +5,41 @@ def my_map(c,f):
   for i in c:
     l.append(f(i))
    return l
+   
+orderItems = open('/home/shubham/data/retail_db/order_items/part-00000').read().splitlines()
+orderRevenue = my_map(orderItems,lambda oi: float(oi.split(",")[4]))
+
+orderRevenue[:10]
+
+totalRevenue = sum(orderRevenue)
+print(totalRevenue)
+
+orderRevenuePerId = my_map(orderItems,lambda oi:(int(oi.split(",")[1]), float(oi.split(",")[4])))
+orderRevenuePerId[:10]
+
+#developing application using map reduce API
+
+
+#get orderItems total revenue
+
+orderItems = sc.textFile('home/shubham868/data/retail_db/order_items/part-00000')
+orderItemsMap = orderItems.map(lambda oi:oi.split(",")[4])
+totalRevenue = sum(orderItems)
+
+
+#get revenue for given order_id.
+
+def getRevenueForOrderId(orderItems,orderId):
+def getRevenueForOrderId(orderItems,orderId):
+    totalRevenue = 0.0
+    for i in orderItems:
+        orderItemsList = i.split(",")
+        if(int(orderItemsList[1]) == orderId):
+            totalRevenue = totalRevenue + float(orderItemsList[4])
+    return totalRevenue
+    
+orderItems = open('/home/shubham/data/retail_db/order_items/part-00000').read().splitlines()
+>>> getRevennueForOrderId(orderItems,2)
+    579.98
+       
+  
