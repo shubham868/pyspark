@@ -65,6 +65,23 @@ orderItemsMap = orderItems.map(lambda oi:oi.split(","),float(oi.split(",")))
 Revenue = orderItemsMap.reduceByKey(lambda x,y: x+y)
 for i in Revenue.take(10):
   print(i)
+  
+  
+# geting unique order Status.
+
+def readData(DataPath):
+    dataFile = open(DataPath)
+    dataStr = dataFile.read()
+    dataList = dataStr.splitlines()
+    return dataList
+DataPath = '/home/shubham/data/orders/part-00000'
+orders = readData(DataPath)
+s = set([])
+for i in orders:
+    s.add(i.split(",")[3])
+for i in s:
+    print(i)
+
 
  
   
