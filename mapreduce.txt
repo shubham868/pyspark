@@ -81,6 +81,22 @@ for i in orders:
     s.add(i.split(",")[3])
 for i in s:
     print(i)
+    
+    
+    
+#using itertools.
+
+ def getorderRevenueUsingIt(order_items,orderId):
+   import itertools as it
+   ordersPerId = it.ifilter(lambda oi:int(oi.split(",")[1]) == orderId,order_items)
+   subtotals = it.imap(lambda oi:float(oi.split(",")[4]),ordersPerId)
+   ordersRevenue = reduce(lambda p,q:p+q,subtotals)
+   return ordersRevenue
+ 
+ order_items = open('/home/shubham/data/retail_db/order_items/part-00000').read().splitlines()
+ getorderRevenueUsingIt(order_items,2)
+>>>579.98
+
 
 
  
